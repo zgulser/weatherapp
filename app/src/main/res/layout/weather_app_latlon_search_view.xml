@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/latlonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/weather_app_container_padding"
+        android:background="@color/weather_app_exp_container_bg_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/latitude"
+            style="@style/Weather_App_LatEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/longitude"
+            style="@style/Weather_App_LonEditText"
+            app:layout_constraintStart_toEndOf="@+id/latitude"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/searchByLatLon"
+            style="@style/Weather_App_Search_Button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/latitude"
+            tools:text="@string/weather_app_search_button" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

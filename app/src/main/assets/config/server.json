@@ -1,0 +1,5 @@
+{
+  "serverUrl": "http://api.openweathermap.org/data",
+  "version": "2.5",
+  "resourcePath": "weather"
+}

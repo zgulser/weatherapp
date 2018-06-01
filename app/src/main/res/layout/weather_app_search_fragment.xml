@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/contentContainer"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/recents"
+                style="@style/Weather_App_Recents_Button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toTopOf="@+id/recents"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/viewContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/explanation"
+                        style="@style/Weather_App_Explanation_TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/weather_app_exp" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/nameZipContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/weather_app_latlon_edittext_margin"
+                        android:background="@color/weather_app_exp_container_bg_color"
+                        android:padding="@dimen/weather_app_container_padding"
+                        app:layout_constraintTop_toBottomOf="@+id/explanation">
+
+                        <EditText
+                            android:id="@+id/nameEditText"
+                            style="@style/Weather_App_NameEditText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/searchByName"
+                            style="@style/Weather_App_Search_Button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                            tools:text="@string/weather_app_search_button" />
+
+                        <EditText
+                            android:id="@+id/zipEditText"
+                            style="@style/Weather_App_ZipCodeEditText"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/comma" />
+
+                        <TextView
+                            android:id="@+id/comma"
+                            style="@style/Weather_App_Seperator_TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/countryEditText"
+                            app:layout_constraintEnd_toStartOf="@+id/countryEditText" />
+
+                        <EditText
+                            android:id="@+id/countryEditText"
+                            style="@style/Weather_App_CountryEditText"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/searchByZipCode"
+                            style="@style/Weather_App_Search_Button"
+                            app:layout_constraintStart_toStartOf="@+id/zipEditText"
+                            app:layout_constraintTop_toBottomOf="@+id/zipEditText"
+                            tools:text="@string/weather_app_search_button" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="1dp"
+                            android:layout_height="100dp"
+                            android:background="@color/weather_app_search_screen_view_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/zipEditText"
+                            app:layout_constraintStart_toEndOf="@+id/nameEditText"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/openLatLonSearch"
+                        style="@style/Weather_App_OpenLatLon_TextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nameZipContainer" />
+
+                </android.support.constraint.ConstraintLayout>
+            </ScrollView>
+        </android.support.constraint.ConstraintLayout>
+
+    </FrameLayout>
+
+
+</layout>

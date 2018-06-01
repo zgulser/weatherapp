@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <android.support.constraint.ConstraintLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/location"
+            style="@style/Weather_App_Location_TextView"
+            app:layout_constraintStart_toStartOf="@+id/temperatureContainer"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Rome, IT" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/temperatureContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/weather_app_result_status_icon_size"
+                android:layout_height="@dimen/weather_app_result_status_icon_size"
+                app:srcCompat="@drawable/weather_app_default_status_icon" />
+
+            <TextView
+                android:id="@+id/statusTitle"
+                style="@style/Weather_App_Status_TextView"
+                tools:text="Clear"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statusMsg"
+                style="@style/Weather_App_Status_Desc_TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statusTitle"
+                tools:text="Clear blue sky" />
+
+            <ImageView
+                android:id="@+id/temperatureIcon"
+                style="@style/Weather_App_Temperature_ImageView"
+                android:layout_marginStart="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/temperature"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/weather_app_temperature_icon" />
+
+            <TextView
+                android:id="@+id/temperature"
+                style="@style/Weather_App_Temperature_TextView"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/temperatureIcon"
+                tools:text="32C" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temperatureContainer">
+
+            <LinearLayout
+                android:id="@+id/humidityContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/Weather_App_Info_ImageView"
+                    app:srcCompat="@drawable/weather_app_humidity_icon" />
+
+                <TextView
+                    android:id="@+id/humidityData"
+                    style="@style/Weather_App_InfoData_TextView"
+                    tools:text="100" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pressureContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/Weather_App_Info_ImageView"
+                    app:srcCompat="@drawable/weather_app_pressure_icon" />
+
+                <TextView
+                    android:id="@+id/pressureData"
+                    style="@style/Weather_App_InfoData_TextView"
+                    tools:text="1010" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/windContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    style="@style/Weather_App_Info_ImageView"
+                    app:srcCompat="@drawable/weather_app_wind_icon" />
+
+                <TextView
+                    android:id="@+id/windData"
+                    style="@style/Weather_App_InfoData_TextView"
+                    tools:text="5.12" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

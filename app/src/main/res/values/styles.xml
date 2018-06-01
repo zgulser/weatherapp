@@ -1,0 +1,182 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Weather_App_BaseTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Weather_App_BaseEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/weather_app_edittext_height</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/weather_app_edittext_text_size</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">@dimen/weather_app_edittext_padding</item>
+    </style>
+
+    <style name="Weather_App_NameEditText" parent="Weather_App_BaseEditText">
+        <item name="android:layout_width">@dimen/weather_app_name_edittext_width</item>
+        <item name="android:inputType">text</item>
+        <item name="android:hint">@string/weather_app_name_hint</item>
+    </style>
+
+    <style name="Weather_App_ZipCodeEditText" parent="Weather_App_BaseEditText">
+        <item name="android:layout_width">@dimen/weather_app_zip_edittext_width</item>
+        <item name="android:layout_marginStart">@dimen/weather_app_zip_edittext_margin_start</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">10</item>
+        <item name="android:hint">@string/weather_app_zipcode_hint</item>
+    </style>
+
+    <style name="Weather_App_CountryEditText" parent="Weather_App_BaseEditText">
+        <item name="android:layout_width">@dimen/weather_app_country_edittext_width</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:maxLength">5</item>
+        <item name="android:hint">@string/weather_app_country_hint</item>
+    </style>
+
+    <style name="Weather_App_LatLonEditText" parent="Weather_App_BaseEditText">
+        <item name="android:layout_width">@dimen/weather_app_latlon_edittext_width</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+    <style name="Weather_App_LatEditText" parent="Weather_App_LatLonEditText">
+        <item name="android:hint">@string/weather_app_lat_hint</item>
+    </style>
+
+    <style name="Weather_App_LonEditText" parent="Weather_App_LatLonEditText">
+        <item name="android:hint">@string/weather_app_lon_hint</item>
+        <item name="android:layout_marginLeft">@dimen/weather_app_error_title_margin_top</item>
+    </style>
+
+    <style name="Weather_App_Explanation_TextView" parent="Weather_App_BaseTextView">
+        <item name="android:text">@string/weather_app_exp</item>
+        <item name="android:textSize">@dimen/weather_app_exp_text_size</item>
+        <item name="android:textColor">@color/weather_app_title_color</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_error_message_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/weather_app_exp_margin_bottom</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Weather_App_Seperator_TextView" parent="Weather_App_BaseTextView">
+        <item name="android:textColor">@color/weather_app_search_screen_view_color</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:text">,</item>
+    </style>
+
+    <style name="Weather_App_ErrorView_Title" parent="Weather_App_BaseTextView">
+        <item name="android:layout_width">@dimen/weather_app_error_title_width</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_error_title_margin_top</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/weather_app_error_title_size</item>
+    </style>
+
+    <style name="Weather_App_ErrorView_Message" parent="Weather_App_BaseTextView">
+        <item name="android:layout_width">@dimen/weather_app_error_message_width</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_error_message_margin_top</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/weather_app_error_message_size</item>
+    </style>
+
+    <style name="Weather_App_ErrorView_ImageView" parent="Weather_App_BaseTextView">
+        <item name="android:layout_width">@dimen/weather_app_error_icon_width</item>
+        <item name="android:layout_height">@dimen/weather_app_error_icon_height</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_error_icon_margin_top</item>
+    </style>
+
+    <style name="Weather_App_Temperature_ImageView" parent="Weather_App_BaseTextView">
+        <item name="android:layout_width">@dimen/weather_app_result_temp_icon_width</item>
+        <item name="android:layout_height">@dimen/weather_app_result_temp_icon_height</item>
+        <item name="android:layout_marginStart">30dp</item>
+    </style>
+
+    <style name="Weather_App_Info_ImageView">
+        <item name="android:layout_width">@dimen/weather_app_result_info_icon_width</item>
+        <item name="android:layout_height">@dimen/weather_app_result_info_icon_height</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="Weather_App_OpenLatLon_TextView" parent="Weather_App_BaseTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/weather_app_open_latlon_show_search_view</item>
+        <item name="android:background">@android:color/transparent</item>"
+        <item name="android:textColor">@color/colorAccent</item>"
+        <item name="android:linksClickable">true</item>"
+        <item name="android:layout_marginTop">@dimen/weather_app_openlatlon_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/weather_app_openlatlon_margin_top</item>
+    </style>
+
+    <style name="Weather_App_Search_Button">
+        <item name="android:layout_width">@dimen/weather_app_search_button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_search_button_margin_top</item>
+        <item name="android:text">@string/weather_app_search_button</item>
+    </style>
+
+    <style name="Weather_App_Retry_Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_search_button_margin_top</item>
+        <item name="android:text">@string/weather_app_error_button</item>
+    </style>
+
+    <style name="Weather_App_Recents_Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/weather_app_recents_button</item>
+    </style>
+
+    <style name="Weather_App_Location_TextView"  parent="Weather_App_BaseTextView">
+        <item name="android:layout_marginTop">@dimen/weather_app_result_location_margin_top</item>
+        <item name="android:textColor">@color/weather_app_title_color</item>"
+        <item name="android:textSize">@dimen/weather_app_result_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Weather_App_Temperature_TextView"  parent="Weather_App_Location_TextView">
+        <item name="android:layout_marginBottom">@dimen/weather_app_result_temp_margin_bottom</item>
+        <item name="android:textSize">@dimen/weather_app_result_temp_text_size</item>
+    </style>
+
+    <style name="Weather_App_Status_TextView"  parent="Weather_App_BaseTextView">
+        <item name="android:gravity">left|center</item>
+        <item name="android:textColor">@color/weather_app_result_screen_status_color</item>"
+        <item name="android:textSize">@dimen/weather_app_result_status_text_size</item>
+    </style>
+
+    <style name="Weather_App_InfoData_TextView"  parent="Weather_App_BaseTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/weather_app_result_screen_status_color</item>"
+        <item name="android:textSize">@dimen/weather_app_result_status_text_size</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_result_info_top_margin</item>
+    </style>
+
+    <style name="Weather_App_Status_Desc_TextView"  parent="Weather_App_Status_TextView">
+        <item name="android:textColor">@color/weather_app_result_screen_status_desc_color</item>"
+        <item name="android:textSize">@dimen/weather_app_result_status_desc_text_size</item>
+        <item name="android:layout_marginStart">@dimen/weather_app_result_status_desc_start_margin</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_result_status_desc_top_margin</item>"
+    </style>
+
+    <style name="Weather_App_Recent_Query_TextView"  parent="Weather_App_Status_TextView">
+        <item name="android:textColor">@color/weather_app_result_screen_status_desc_color</item>"
+        <item name="android:textSize">@dimen/weather_app_result_status_desc_text_size</item>
+        <item name="android:layout_marginTop">@dimen/weather_app_result_status_desc_top_margin</item>"
+    </style>
+
+
+
+</resources>

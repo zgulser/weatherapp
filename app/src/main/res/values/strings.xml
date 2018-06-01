@@ -1,0 +1,20 @@
+<resources>
+    <string name="weather_app_name_hint">city name</string>
+    <string name="weather_app_zipcode_hint">zip code</string>
+    <string name="weather_app_country_hint">Co.</string>
+    <string name="weather_app_lat_hint">latitude</string>
+    <string name="weather_app_lon_hint">longitude</string>
+    <string name="weather_app_offline_title">You\'re Offline</string>
+    <string name="weather_app_offline_message">Please make sure you\'re connected to the internet and swipe down to try again.</string>
+    <string name="weather_app_error_title">Loading Failed</string>
+    <string name="weather_app_error_message">Something went wrong while retrieving the city weather. Click \'Retry\' down to try again.</string>
+    <string name="weather_app_error_button">RETRY</string>
+    <string name="weather_app_recents_button">RECENT SEARCHES</string>
+    <string name="weather_app_empty_title">No Cities Found</string>
+    <string name="weather_app_empty_message">Not city is found with that info . Please try again.</string>
+    <string name="weather_app_open_latlon_show_search_view">Show geoloc search</string>
+    <string name="weather_app_open_latlon_hide_search_view">Hide geoloc search</string>
+    <string name="weather_app_exp">Welcome to the weather app.\nPlease make a search!</string>
+    <string name="weather_app_search_button">GO >></string>
+    <string name="weather_app_search_query" formatted="true"><i>your query was: %s</i></string>
+</resources>

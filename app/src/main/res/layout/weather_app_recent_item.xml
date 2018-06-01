@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data></data>
+    <android.support.constraint.ConstraintLayout
+        android:padding="@dimen/weather_app_recent_item_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Weather_App_Status_TextView"
+            tools:text="Rome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/query"
+            style="@style/Weather_App_Recent_Query_TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="lat=35,lon=139" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/Weather_App_Status_TextView"
+            android:text="11.04.2018"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
