@@ -26,7 +26,7 @@ import com.ebay.codingexercise.apps.weatherinfo.view.custom.error.StatusView;
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
-public class SearchFragment extends Fragment implements View.OnClickListener{
+public class SearchFragment extends Fragment{
 
     private static final int DURATION = 400;
     private static final float FROM_SCALE = 0.0f;
@@ -60,71 +60,69 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.bindingView = DataBindingUtil.inflate(inflater, R.layout.weather_app_search_fragment, container, false);
-        this.initListeners();
+        this.bindingView.setClickHandlers(this);
         return bindingView.getRoot();
     }
 
-    private void initListeners(){
-        bindingView.openLatLonSearch.setOnClickListener(this);
-        bindingView.recents.setOnClickListener(this);
-        bindingView.searchByName.setOnClickListener(this);
-        bindingView.searchByZipCode.setOnClickListener(this);
+    public void onClickSearchByName(View view){
+        searchFragmentListener.searchByCityName(
+                bindingView.nameEditText.getText().toString(), new RequestListener() {
+                    @Override
+                    public void onSuccess(CityWeather cityWeather) {
+                        // do nothing
+                    }
+
+                    @Override
+                    public void onError(RequestError requestError) {
+                        addStatusView(ErrorItem.ErrorType.ERROR);
+                    }
+                });
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == bindingView.openLatLonSearch.getId()){
-            if (bindingViewLatLonSearch == null){
-                initLatLonSearchView();
-            }
-            if (bindingViewLatLonSearch.latlonContainer.getVisibility() == View.GONE){
-                showLatlonSearchView();
-            } else {
-                hideLatlonSearchView();
-            }
-        } else if (view.getId() == bindingView.recents.getId()){
-            searchFragmentListener.openRecentsFragment();
-        }else if (view.getId() == bindingView.searchByName.getId()){
-            searchFragmentListener.searchByCityName(
-                    bindingView.nameEditText.getText().toString(), new RequestListener() {
-                        @Override
-                        public void onSuccess(CityWeather cityWeather) {
-                            // do nothing
-                        }
+    public void onClickSearchByZipCode(View view){
+        searchFragmentListener.searchByCityZipCode(
+            bindingView.zipEditText.getText().toString(), new RequestListener() {
+                @Override
+                public void onSuccess(CityWeather cityWeather) {
+                    // do nothing
+                }
 
-                        @Override
-                        public void onError(RequestError requestError) {
-                            addStatusView(ErrorItem.ErrorType.ERROR);
-                        }
-                    });
-        } else if (view.getId() == bindingView.searchByZipCode.getId()){
-            searchFragmentListener.searchByCityZipCode(
-                    bindingView.zipEditText.getText().toString(), new RequestListener() {
-                        @Override
-                        public void onSuccess(CityWeather cityWeather) {
-                            // do nothing
-                        }
+                @Override
+                public void onError(RequestError requestError) {
+                    addStatusView(ErrorItem.ErrorType.ERROR);
+                }
+            });
+    }
 
-                        @Override
-                        public void onError(RequestError requestError) {
-                            addStatusView(ErrorItem.ErrorType.ERROR);
-                        }
-                    });
-        } else if (view.getId() == bindingViewLatLonSearch.searchByLatLon.getId()){
-            searchFragmentListener.searchByCityGeoloc(
-                    Integer.valueOf(bindingViewLatLonSearch.latitude.getText().toString()),
-                    Integer.valueOf(bindingViewLatLonSearch.longitude.getText().toString()), new RequestListener() {
-                        @Override
-                        public void onSuccess(CityWeather cityWeather) {
-                            // do nothing
-                        }
+    public void onRecentsClicked(View view){
+        searchFragmentListener.openRecentsFragment();
+    }
 
-                        @Override
-                        public void onError(RequestError requestError) {
-                            addStatusView(ErrorItem.ErrorType.ERROR);
-                        }
-                    });
+    public void onOpenLatLonSearch(View view){
+        if (bindingViewLatLonSearch == null){
+            initLatLonSearchView();
         }
+        if (bindingViewLatLonSearch.latlonContainer.getVisibility() == View.GONE){
+            showLatlonSearchView();
+        } else {
+            hideLatlonSearchView();
+        }
+    }
+
+    public void onClickSearchByGeoloc(View view){
+        searchFragmentListener.searchByCityGeoloc(
+                Integer.valueOf(bindingViewLatLonSearch.latitude.getText().toString()),
+                Integer.valueOf(bindingViewLatLonSearch.longitude.getText().toString()), new RequestListener() {
+                    @Override
+                    public void onSuccess(CityWeather cityWeather) {
+                        // do nothing
+                    }
+
+                    @Override
+                    public void onError(RequestError requestError) {
+                        addStatusView(ErrorItem.ErrorType.ERROR);
+                    }
+                });
     }
 
     private void initLatLonSearchView(){
@@ -132,9 +130,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
         params.width = bindingView.nameZipContainer.getWidth();
         params.topToBottom = bindingView.openLatLonSearch.getId();
         params.setMargins(0, (int)getResources().getDimension(R.dimen.weather_app_openlatlon_margin_top), 0, 0);
-        this.bindingViewLatLonSearch = DataBindingUtil.inflate(
-                LayoutInflater.from(bindingView.viewContainer.getContext()), R.layout.weather_app_latlon_search_view, null, false);
-        this.bindingViewLatLonSearch.searchByLatLon.setOnClickListener(this);
+        this.bindingViewLatLonSearch = DataBindingUtil.inflate(LayoutInflater.from(bindingView.viewContainer.getContext()),
+                        R.layout.weather_app_latlon_search_view, null, false);
+        this.bindingViewLatLonSearch.setClickHandlers(this);
         View latLonSearchView = bindingViewLatLonSearch.latlonContainer;
         latLonSearchView.setLayoutParams(params);
         bindingView.viewContainer.addView(latLonSearchView);

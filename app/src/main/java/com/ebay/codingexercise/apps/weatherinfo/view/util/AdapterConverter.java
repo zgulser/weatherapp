@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
+
 public class AdapterConverter {
 
     public static List<ItemViewModel> convertQueriesToViewModels(List<Query> queryList){

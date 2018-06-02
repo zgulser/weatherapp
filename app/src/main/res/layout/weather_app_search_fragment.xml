@@ -2,7 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <data>
+        <import type="android.view.View"/>
+        <variable name="clickHandlers" type="com.ebay.codingexercise.apps.weatherinfo.view.SearchFragment"/>
+    </data>
     <FrameLayout
         android:id="@+id/parentView"
         android:layout_width="match_parent"
@@ -19,7 +22,8 @@
                 style="@style/Weather_App_Recents_Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:onClick="@{clickHandlers.onRecentsClicked}"/>
 
             <ScrollView
                 android:id="@+id/scrollView"
@@ -64,6 +68,7 @@
                             style="@style/Weather_App_Search_Button"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                            android:onClick="@{clickHandlers.onClickSearchByName}"
                             tools:text="@string/weather_app_search_button" />
 
                         <EditText
@@ -89,6 +94,7 @@
                             style="@style/Weather_App_Search_Button"
                             app:layout_constraintStart_toStartOf="@+id/zipEditText"
                             app:layout_constraintTop_toBottomOf="@+id/zipEditText"
+                            android:onClick="@{clickHandlers.onClickSearchByZipCode}"
                             tools:text="@string/weather_app_search_button" />
 
                         <View
@@ -108,7 +114,8 @@
                         style="@style/Weather_App_OpenLatLon_TextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nameZipContainer" />
+                        app:layout_constraintTop_toBottomOf="@+id/nameZipContainer"
+                        android:onClick="@{clickHandlers.onOpenLatLonSearch}"/>
 
                 </android.support.constraint.ConstraintLayout>
             </ScrollView>

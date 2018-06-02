@@ -1,8 +1,11 @@
 package com.ebay.codingexercise.apps.weatherinfo.view.custom.error;
 
+import android.support.annotation.DrawableRes;
+
 /**
- * Created by Zeki Gulser R&D B.V on 31/05/2018.
+ * Created by Zeki Gulser on 31/05/2018.
  */
+
 public class ErrorItem {
 
     public enum ErrorType {
@@ -13,7 +16,7 @@ public class ErrorItem {
     private final String title;
     private final String message;
 
-    ErrorItem(int imageResource, String title, String message) {
+    ErrorItem(@DrawableRes int imageResource, String title, String message) {
         this.imageResource = imageResource;
         this.title = title;
         this.message = message;

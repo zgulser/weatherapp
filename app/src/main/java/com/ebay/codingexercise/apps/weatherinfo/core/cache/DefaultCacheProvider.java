@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
+import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheDeleteListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 import com.google.gson.Gson;
@@ -23,6 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
+
 public final class DefaultCacheProvider implements CacheProvider {
 
     private static final String FILENAME = "queries";
@@ -58,14 +60,11 @@ public final class DefaultCacheProvider implements CacheProvider {
     }
 
     /**
-     *  Method to read the "pickled" query objects.
      *
      *  Note: Items sent through intents have size limits. Not sure that applies when we use
      *        LocalBroaccastManager since intent does not leave the process sandbox which can
      *        mean no IPC-related constraints. If it's items may be sent using a listener.
      *
-     * @param context
-     * @param cacheReadListener
      */
     @Override
     public void readObjectList(final Context context, @Nullable final CacheReadListener cacheReadListener) {
@@ -108,5 +107,10 @@ public final class DefaultCacheProvider implements CacheProvider {
         });
         reader.setPriority(Thread.MIN_PRIORITY);
         reader.start();
+    }
+
+    @Override
+    public void deleteObject(Context context, CacheDeleteListener cacheDeleteListener) {
+        // no implementation needed
     }
 }

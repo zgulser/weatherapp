@@ -4,12 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
+import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheDeleteListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
+
 public final class SearchDiskCache {
 
     private static final String TAG = SearchDiskCache.class.getSimpleName();
@@ -47,4 +49,11 @@ public final class SearchDiskCache {
         }
     }
 
+    public synchronized void deleteObject(Context context, CacheDeleteListener cacheDeleteListener){
+        if (cacheProvider != null){
+            cacheProvider.deleteObject(context, cacheDeleteListener);
+        } else {
+            Log.d(TAG, "SearchDiskCache.deleteObject: No cache provider has been set.");
+        }
+    }
 }

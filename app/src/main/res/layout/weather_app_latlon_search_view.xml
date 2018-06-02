@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="clickHandlers" type="com.ebay.codingexercise.apps.weatherinfo.view.SearchFragment"/>
+    </data>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/latlonContainer"
         android:layout_width="match_parent"
@@ -29,6 +33,7 @@
             style="@style/Weather_App_Search_Button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/latitude"
+            android:onClick="@{clickHandlers.onClickSearchByGeoloc}"
             tools:text="@string/weather_app_search_button" />
 
     </android.support.constraint.ConstraintLayout>

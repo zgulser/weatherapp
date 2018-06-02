@@ -13,6 +13,7 @@ import com.ebay.codingexercise.apps.weatherinfo.R;
 
 /**
  * Created by Zeki Gulser on 31/05/2018.
+ * TODO: Make it work with binding views
  */
 
 public abstract class BaseStatusView extends LinearLayout {
@@ -48,6 +49,7 @@ public abstract class BaseStatusView extends LinearLayout {
         this.setVisibility(VISIBLE);
     }
 
+    @SuppressWarnings("unused")
     public void hide() {
         this.setVisibility(GONE);
     }

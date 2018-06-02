@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 /**
  * Created by Zeki Gulser on 01/06/2018.
  */
+
 public class KeyboardUtils {
 
     public static void hideKeyboard(View view){
