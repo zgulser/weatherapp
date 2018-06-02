@@ -46,13 +46,26 @@ public class ActivityTest {
         int result = activityTestRule.getActivity().addFragment(
                 ResultFragment.newInstance(bundle),
                 WeatherActivity.RESULT_FRAGMENT_TAG);
-        assertTrue("@test_addFragment", result > 0);
+        assertTrue("@test_addFragment: unable to add a fragment", result > 0);
     }
 
     @Test
     public void test_bindService() {
         boolean connected = activityTestRule.getActivity().bindService();
-        assertTrue("@test_addFragment", connected);
+        assertTrue("@test_bindService: Unable to bind to the weather service", connected);
+    }
+
+    @Test
+    public void test_openRecentsFragment(){
+        int backStackEntry = activityTestRule.getActivity().openRecentsFragment();
+        assertTrue("@test_openRecentsFragment: Unable to open recents fragment", backStackEntry > 0);
+    }
+
+    @Test
+    public void test_createResultFragment(){
+        CityWeather cityWeather = getCityWeather("cityweather");
+        int backStackEntry = activityTestRule.getActivity().createResultFragment(cityWeather);
+        assertTrue("@test_createResultFragment: Unable to create a result fragment", backStackEntry > 0);
     }
 
     private CityWeather getCityWeather(String fileName) {

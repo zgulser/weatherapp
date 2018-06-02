@@ -108,19 +108,20 @@ public class WeatherActivity extends BaseActivity
         createResultFragment(query.getCityWeather());
     }
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     @Override
-    protected void createResultFragment(CityWeather cityWeather){
+    public int createResultFragment(CityWeather cityWeather){
         Bundle bundle = new Bundle();
         bundle.putParcelable(BUNDLE_CITY_WEATHER_KEY, cityWeather);
-        addFragmentWithPop(ResultFragment.newInstance(bundle), RESULT_FRAGMENT_TAG);
+        return addFragmentWithPop(ResultFragment.newInstance(bundle), RESULT_FRAGMENT_TAG);
     }
 
     @VisibleForTesting
-    public void addFragmentWithPop(Fragment fragment, String tag) {
+    public int addFragmentWithPop(Fragment fragment, String tag) {
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
             getSupportFragmentManager().popBackStack();
         }
-        addFragment(fragment, tag);
+        return addFragment(fragment, tag);
     }
 
     @Override
@@ -157,8 +158,8 @@ public class WeatherActivity extends BaseActivity
     }
 
     @Override
-    public void openRecentsFragment() {
-        addFragment(RecentsFragment.newInstance(new Bundle()), RECENTS_FRAGMENT_TAG);
+    public int openRecentsFragment() {
+        return addFragment(RecentsFragment.newInstance(new Bundle()), RECENTS_FRAGMENT_TAG);
     }
 
     private ServiceConnection weatherServiceConnection = new ServiceConnection() {

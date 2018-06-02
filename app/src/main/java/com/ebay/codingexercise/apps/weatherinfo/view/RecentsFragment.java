@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ebay.codingexercise.apps.weatherinfo.R;
-import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultCacheProvider;
+import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultDiskCacheProvider;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
 import com.ebay.codingexercise.apps.weatherinfo.core.cache.SearchDiskCache;
 import com.ebay.codingexercise.apps.weatherinfo.databinding.WeatherAppRecentsFragmentBinding;
@@ -157,7 +157,7 @@ public class RecentsFragment extends Fragment
     @Nullable
     private List<Query> getQueryListFromIntent(@NonNull Intent intent) {
         if (intent.getExtras() != null){
-            return intent.getExtras().getParcelableArrayList(DefaultCacheProvider.BUNDLE_QUERY_LIST_KEY);
+            return intent.getExtras().getParcelableArrayList(DefaultDiskCacheProvider.BUNDLE_QUERY_LIST_KEY);
         }
         return null;
     }

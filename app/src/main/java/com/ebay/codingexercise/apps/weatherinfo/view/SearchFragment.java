@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment{
         void searchByCityName(String query, RequestListener requestListener);
         void searchByCityZipCode(String query, RequestListener requestListener);
         void searchByCityGeoloc(int lat, int lon, RequestListener requestListener);
-        void openRecentsFragment();
+        int openRecentsFragment();
     }
 
     public static SearchFragment newInstance(Bundle bundle) {

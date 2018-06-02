@@ -12,6 +12,8 @@ import java.util.List;
 
 public class AdapterConverter {
 
+    private AdapterConverter(){}
+
     public static List<ItemViewModel> convertQueriesToViewModels(List<Query> queryList){
         List<ItemViewModel> itemViewModelList = new ArrayList<>();
         for (Query query : queryList){

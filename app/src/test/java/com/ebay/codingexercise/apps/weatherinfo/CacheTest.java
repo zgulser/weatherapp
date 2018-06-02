@@ -1,15 +1,12 @@
 package com.ebay.codingexercise.apps.weatherinfo;
 
-import com.ebay.codingexercise.apps.weatherinfo.RobolectricTestRunnerWithResources;
-import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultCacheProvider;
+import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultDiskCacheProvider;
 import com.ebay.codingexercise.apps.weatherinfo.core.cache.SearchDiskCache;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.CityWeather;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 import com.ebay.codingexercise.apps.weatherinfo.utils.TestUtility;
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
 
 import junit.framework.Assert;
 
@@ -18,11 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -36,7 +28,7 @@ public class CacheTest {
     @Before
     public void setup(){
         countDownLatch = new CountDownLatch(1);
-        SearchDiskCache.getInstance().setCacheProvider(new DefaultCacheProvider());
+        SearchDiskCache.getInstance().setCacheProvider(new DefaultDiskCacheProvider());
     }
 
     @Test

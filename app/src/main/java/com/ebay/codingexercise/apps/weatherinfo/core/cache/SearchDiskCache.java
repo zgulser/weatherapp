@@ -8,6 +8,8 @@ import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheDeleteListen
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 
+import java.util.List;
+
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
@@ -18,7 +20,7 @@ public final class SearchDiskCache {
     private static SearchDiskCache searchDiskCache;
     private CacheProvider cacheProvider;
     public static final String EVENT_QUERY_OBJECT_READ = "com.ebay.codingexercise.apps.weatherinfo_EVENT_QUERY_OBJECT_READ";
-    public static final String EVENT_QUERY_OBJECT_WRITE = "com.ebay.codingexercise.apps.weatherinfo_EVENT_QUERY_OBJECT_WRITE";
+    @SuppressWarnings("unused") public static final String EVENT_QUERY_OBJECT_WRITE = "com.ebay.codingexercise.apps.weatherinfo_EVENT_QUERY_OBJECT_WRITE";
 
     private  SearchDiskCache(){ }
 
@@ -33,7 +35,11 @@ public final class SearchDiskCache {
         this.cacheProvider = cacheProvider;
     }
 
-    public synchronized void writeObject(Context context, Query object, CacheWriteListener cacheWriteListener){
+    /**
+     * @param object query object to be stored
+     * @param cacheWriteListener {@link CacheWriteListener}
+     */
+    public void writeObject(Context context, Query object, CacheWriteListener cacheWriteListener){
         if (cacheProvider != null){
             cacheProvider.writeObject(context, object, cacheWriteListener);
         } else {
@@ -41,7 +47,10 @@ public final class SearchDiskCache {
         }
     }
 
-    public synchronized void readObjectList(Context context, CacheReadListener cacheReadListener){
+    /**
+     * @param cacheReadListener @param cacheDeleteListener {@link CacheReadListener}
+     */
+    public void readObjectList(Context context, CacheReadListener cacheReadListener){
         if (cacheProvider != null){
             cacheProvider.readObjectList(context, cacheReadListener);
         } else {
@@ -49,9 +58,14 @@ public final class SearchDiskCache {
         }
     }
 
-    public synchronized void deleteObject(Context context, CacheDeleteListener cacheDeleteListener){
+    /**
+     * @param deleteList list of keys (timestamps) to be deleted
+     * @param cacheDeleteListener {@link CacheDeleteListener}
+     */
+    @SuppressWarnings("unused")
+    public void deleteObjectList(Context context, List<Query> deleteList, CacheDeleteListener cacheDeleteListener){
         if (cacheProvider != null){
-            cacheProvider.deleteObject(context, cacheDeleteListener);
+            cacheProvider.deleteObjectList(context, deleteList, cacheDeleteListener);
         } else {
             Log.d(TAG, "SearchDiskCache.deleteObject: No cache provider has been set.");
         }

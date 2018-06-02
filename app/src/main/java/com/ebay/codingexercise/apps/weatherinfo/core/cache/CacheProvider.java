@@ -7,6 +7,8 @@ import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheDeleteListen
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 
+import java.util.List;
+
 /**
  * Created by Zeki Gulser on 31/05/2018.
  */
@@ -17,5 +19,7 @@ public interface CacheProvider {
 
     void readObjectList(Context context, CacheReadListener cacheReadListener);
 
-    void deleteObject(Context context, CacheDeleteListener cacheDeleteListener);
+    void deleteObjectList(Context context, List<Query> deleteList, CacheDeleteListener cacheDeleteListener);
+
+    void readLastObject(Context context, String key, CacheReadListener cacheReadListener);
 }

@@ -17,7 +17,7 @@ import com.ebay.codingexercise.apps.weatherinfo.core.service.dataprovider.DataPr
 /**
  * Created by Zeki Gulser R&D B.V on 31/05/2018.
  */
-public class WeatherBoundService extends Service {
+public final class WeatherBoundService extends Service {
 
     private DataProvider dataProvider;
     private final IBinder weatherServiceBinder = new WeatherServiceBinder();

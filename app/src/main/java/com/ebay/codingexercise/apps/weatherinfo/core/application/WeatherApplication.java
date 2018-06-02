@@ -2,7 +2,7 @@ package com.ebay.codingexercise.apps.weatherinfo.core.application;
 
 import android.app.Application;
 
-import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultCacheProvider;
+import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultDiskCacheProvider;
 import com.ebay.codingexercise.apps.weatherinfo.core.cache.SearchDiskCache;
 
 /**
@@ -18,6 +18,6 @@ public class WeatherApplication extends Application {
         super.onCreate();
 
         SearchDiskCache searchDiskCache = SearchDiskCache.getInstance();
-        searchDiskCache.setCacheProvider(new DefaultCacheProvider());
+        searchDiskCache.setCacheProvider(new DefaultDiskCacheProvider());
     }
 }

@@ -17,22 +17,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Zeki Gulser on 31/05/2018.
+ * Uses shared prefs to store queried cities.
  */
 
-public final class DefaultCacheProvider implements CacheProvider {
+public final class DefaultDiskCacheProvider implements CacheProvider {
 
     private static final String FILENAME = "queries";
     public static final String BUNDLE_QUERY_LIST_KEY = "queries";
 
-    public DefaultCacheProvider(){
+    public DefaultDiskCacheProvider(){
     }
 
+    /**
+     * Method to store query <timestamp, object> tuple in the shared prefs
+     */
     @Override
     public void writeObject(final Context context, final Query query, @Nullable final CacheWriteListener cacheWriteListener) {
         Thread writer = new Thread(new Runnable() {
@@ -110,7 +115,12 @@ public final class DefaultCacheProvider implements CacheProvider {
     }
 
     @Override
-    public void deleteObject(Context context, CacheDeleteListener cacheDeleteListener) {
-        // no implementation needed
+    public void deleteObjectList(Context context, List<Query> deleteList, CacheDeleteListener cacheDeleteListener) {
+        // not implemented yet
+    }
+
+    @Override
+    public void readLastObject(Context context, String key, CacheReadListener cacheReadListener) {
+
     }
 }

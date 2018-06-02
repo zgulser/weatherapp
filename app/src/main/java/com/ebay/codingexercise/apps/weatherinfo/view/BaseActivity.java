@@ -8,6 +8,6 @@ import com.ebay.codingexercise.apps.weatherinfo.core.dto.CityWeather;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected abstract void createResultFragment(CityWeather cityWeather);
+    protected abstract int createResultFragment(CityWeather cityWeather);
 
 }
