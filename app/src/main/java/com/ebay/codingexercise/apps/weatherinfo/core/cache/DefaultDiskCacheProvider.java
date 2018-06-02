@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheDeleteListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheWriteListener;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +34,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public final class DefaultDiskCacheProvider implements CacheProvider {
 
+    private static final String TAG = DefaultDiskCacheProvider.class.getSimpleName();
     private static final String LAST_ITEM = "lastitem";
     @VisibleForTesting public static final String FILENAME = "queries";
     public static final String BUNDLE_QUERY_LIST_KEY = "queries";
@@ -81,10 +86,15 @@ public final class DefaultDiskCacheProvider implements CacheProvider {
                     SharedPreferences pickledQueries = context.getSharedPreferences(FILENAME, MODE_PRIVATE);
                     Collection<String> values = (Collection<String>) pickledQueries.getAll().values();
                     for (String queryJSON : values) {
-                        Query query = new Gson().fromJson(queryJSON, Query.class);
-                        queryList.add(query);
+                        try {
+                            Query query = null;
+                            if ((query = new Gson().fromJson(queryJSON, Query.class)) != null)
+                                queryList.add(query);
+                        } catch (JsonSyntaxException e){
+                            Log.e(TAG, "OnQueriesReceived.onReceive: query list returned null");
+                            continue;
+                        }
                     }
-
                     readCommon(context, queryList, cacheReadListener);
                 }  catch (Exception e){
                     if (cacheReadListener != null)
