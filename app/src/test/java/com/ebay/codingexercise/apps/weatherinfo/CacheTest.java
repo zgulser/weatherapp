@@ -1,5 +1,8 @@
 package com.ebay.codingexercise.apps.weatherinfo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.ebay.codingexercise.apps.weatherinfo.core.cache.DefaultDiskCacheProvider;
 import com.ebay.codingexercise.apps.weatherinfo.core.cache.SearchDiskCache;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.CityWeather;
@@ -25,9 +28,13 @@ import java.util.concurrent.CountDownLatch;
 public class CacheTest {
 
     private CountDownLatch countDownLatch;
+    private SharedPreferences sharedPrefs;
+    private SharedPreferences.Editor editor;
+    private Context context;
+
     @Before
-    public void setup(){
-        countDownLatch = new CountDownLatch(1);
+    public void setup() {
+        this.countDownLatch = new CountDownLatch(1);
         SearchDiskCache.getInstance().setCacheProvider(new DefaultDiskCacheProvider());
     }
 
@@ -38,7 +45,7 @@ public class CacheTest {
         SearchDiskCache.getInstance().writeObject(RuntimeEnvironment.application.getApplicationContext(), query, new CacheWriteListener() {
             @Override
             public void onSuccess(Query written) {
-                Assert.assertTrue("@test_writeObject: Unable to write the query object", query != null);
+                Assert.assertTrue("@test_writeObject: Unable to write the query object", query.getCityWeather().getName().equals("Rome"));
                 countDownLatch.countDown();
             }
 
@@ -68,5 +75,26 @@ public class CacheTest {
             }
         });
         countDownLatch.await();
+        Thread.sleep(5000);
     }
+
+    @Test
+    public void test_readLastObject() throws InterruptedException {
+        SearchDiskCache.getInstance().readLastObject(RuntimeEnvironment.application.getApplicationContext(), new CacheReadListener() {
+            @Override
+            public void onSuccess(List<Query> queryList) {
+                Assert.assertTrue("@test_readLastObject: Unable to read the query list", queryList != null);
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onError() {
+                assert false;
+                countDownLatch.countDown();
+            }
+        });
+        countDownLatch.await();
+        Thread.sleep(5000);
+    }
+
 }
