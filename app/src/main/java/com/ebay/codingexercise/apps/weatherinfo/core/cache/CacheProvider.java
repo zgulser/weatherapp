@@ -21,5 +21,5 @@ public interface CacheProvider {
 
     void deleteObjectList(Context context, List<Query> deleteList, CacheDeleteListener cacheDeleteListener);
 
-    void readLastObject(Context context, String key, CacheReadListener cacheReadListener);
+    void readLastObject(Context context, CacheReadListener cacheReadListener);
 }

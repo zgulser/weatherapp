@@ -30,6 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
 public final class DefaultDiskCacheProvider implements CacheProvider {
 
     private static final String FILENAME = "queries";
+    private static final String LAST_ITEM = "lastitem";
     public static final String BUNDLE_QUERY_LIST_KEY = "queries";
 
     public DefaultDiskCacheProvider(){
@@ -49,6 +50,7 @@ public final class DefaultDiskCacheProvider implements CacheProvider {
                     Gson gson = new Gson();
                     String json = gson.toJson(query);
                     editor.putString(String.valueOf(query.getTimestamp()), json);
+                    editor.putString(LAST_ITEM, String.valueOf(query.getTimestamp()));
                     editor.commit();
 
                     if (cacheWriteListener != null)
@@ -85,25 +87,7 @@ public final class DefaultDiskCacheProvider implements CacheProvider {
                         queryList.add(query);
                     }
 
-                    if (!queryList.isEmpty()) {
-                        Collections.sort(queryList, new Comparator<Query>() {
-                            @Override
-                            public int compare(Query q1, Query q2) {
-                                return (int) (q2.getTimestamp() - q1.getTimestamp());
-                            }
-                        });
-
-                        Intent intent = new Intent(SearchDiskCache.EVENT_QUERY_OBJECT_READ);
-                        Bundle queryObject = new Bundle();
-                        queryObject.putParcelableArrayList(BUNDLE_QUERY_LIST_KEY, queryList);
-                        intent.putExtras(queryObject);
-                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
-                    }
-
-                    if (cacheReadListener != null) {
-                        cacheReadListener.onSuccess(queryList);
-                    }
+                    readCommon(context, queryList, cacheReadListener);
                 }  catch (Exception e){
                     if (cacheReadListener != null)
                         cacheReadListener.onError();
@@ -120,7 +104,47 @@ public final class DefaultDiskCacheProvider implements CacheProvider {
     }
 
     @Override
-    public void readLastObject(Context context, String key, CacheReadListener cacheReadListener) {
+    public void readLastObject(final Context context, final CacheReadListener cacheReadListener) {
+        Thread reader = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ArrayList<Query> queryList = new ArrayList<>();
+                    SharedPreferences pickledQueries = context.getSharedPreferences(FILENAME, MODE_PRIVATE);
+                    String lastItemKey = pickledQueries.getString(LAST_ITEM,"");
+                    String queryJSON = pickledQueries.getString(lastItemKey,"");
+                    Query query = new Gson().fromJson(queryJSON, Query.class);
+                    queryList.add(query);
 
+                    readCommon(context, queryList, cacheReadListener);
+                }  catch (Exception e){
+                    if (cacheReadListener != null)
+                        cacheReadListener.onError();
+                }
+            }
+        });
+        reader.setPriority(Thread.MIN_PRIORITY);
+        reader.start();
+    }
+
+    private synchronized void readCommon(Context context, ArrayList<Query> queryList, CacheReadListener cacheReadListener){
+        if (!queryList.isEmpty()) {
+            Collections.sort(queryList, new Comparator<Query>() {
+                @Override
+                public int compare(Query q1, Query q2) {
+                    return (int) (q2.getTimestamp() - q1.getTimestamp());
+                }
+            });
+
+            Intent intent = new Intent(SearchDiskCache.EVENT_QUERY_OBJECT_READ);
+            Bundle queryObject = new Bundle();
+            queryObject.putParcelableArrayList(BUNDLE_QUERY_LIST_KEY, queryList);
+            intent.putExtras(queryObject);
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        }
+
+        if (cacheReadListener != null) {
+            cacheReadListener.onSuccess(queryList);
+        }
     }
 }

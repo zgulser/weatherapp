@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="weather_app_title_color">#7D7D7D</color>
+    <color name="weather_app_default_bg_color">#FFFFFF</color>
     <color name="weather_app_result_screen_status_color">#7D7D7D</color>
     <color name="weather_app_result_screen_status_desc_color">#997D7D7D</color>
     <color name="weather_app_search_screen_view_color">#557D7D7D</color>

@@ -19,9 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ebay.codingexercise.apps.weatherinfo.R;
+import com.ebay.codingexercise.apps.weatherinfo.core.cache.SearchDiskCache;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.Query;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.CityWeather;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.RequestError;
+import com.ebay.codingexercise.apps.weatherinfo.core.listeners.CacheReadListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.listeners.RequestListener;
 import com.ebay.codingexercise.apps.weatherinfo.core.service.WeatherBoundService;
 import com.ebay.codingexercise.apps.weatherinfo.core.service.dataprovider.DefaultDataProvider;
@@ -56,6 +58,7 @@ public class WeatherActivity extends BaseActivity
         this.bindingView = DataBindingUtil.setContentView(this, R.layout.weather_app_activity_main);
         this.getSupportFragmentManager().addOnBackStackChangedListener(this);
         this.addFragment(SearchFragment.newInstance(new Bundle()), SEARCH_FRAGMENT_TAG);
+        this.readLastItemIfAny();
         this.bindService();
     }
 
@@ -177,6 +180,23 @@ public class WeatherActivity extends BaseActivity
             isWeatherServiceBound = false;
         }
     };
+
+    private void readLastItemIfAny(){
+        SearchDiskCache.getInstance().readLastObject(this, new CacheReadListener() {
+            @Override
+            public void onSuccess(List<Query> queryList) {
+                if (!queryList.isEmpty()){
+                    Query lastQuery = queryList.get(0);
+                    createResultFragment(lastQuery.getCityWeather());
+                }
+            }
+
+            @Override
+            public void onError() {
+                // do nothing
+            }
+        });
+    }
 
     /**
      * Helper class to reduce code line

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.ebay.codingexercise.apps.weatherinfo.databinding.WeatherAppLatlonSear
 import com.ebay.codingexercise.apps.weatherinfo.databinding.WeatherAppSearchFragmentBinding;
 import com.ebay.codingexercise.apps.weatherinfo.view.custom.error.ErrorItem;
 import com.ebay.codingexercise.apps.weatherinfo.view.custom.error.StatusView;
+import com.ebay.codingexercise.apps.weatherinfo.view.util.KeyboardUtils;
 
 /**
  * Created by Zeki Gulser on 31/05/2018.

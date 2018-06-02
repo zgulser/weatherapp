@@ -3,6 +3,7 @@ package com.ebay.codingexercise.apps.weatherinfo.view;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -18,6 +19,7 @@ import com.ebay.codingexercise.apps.weatherinfo.R;
 import com.ebay.codingexercise.apps.weatherinfo.core.dto.CityWeather;
 import com.ebay.codingexercise.apps.weatherinfo.databinding.WeatherAppResultFragmentBinding;
 import com.ebay.codingexercise.apps.weatherinfo.view.custom.TopAlignSuperscriptSpan;
+import com.ebay.codingexercise.apps.weatherinfo.view.util.KeyboardUtils;
 
 import static com.ebay.codingexercise.apps.weatherinfo.view.WeatherActivity.BUNDLE_CITY_WEATHER_KEY;
 
@@ -44,6 +46,11 @@ public class ResultFragment extends Fragment {
         this.bindingView = DataBindingUtil.inflate(inflater, R.layout.weather_app_result_fragment, container, false);
         this.initViews();
         return bindingView.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initViews(){

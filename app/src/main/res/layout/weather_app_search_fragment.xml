@@ -13,7 +13,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/contentContainer"
-            android:background="@android:color/white"
+            android:background="@color/weather_app_default_bg_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

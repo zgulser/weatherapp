@@ -70,4 +70,15 @@ public final class SearchDiskCache {
             Log.d(TAG, "SearchDiskCache.deleteObject: No cache provider has been set.");
         }
     }
+
+    /**
+     * @param cacheReadListener @param cacheDeleteListener {@link CacheReadListener}
+     */
+    public void readLastObject(Context context, CacheReadListener cacheReadListener){
+        if (cacheProvider != null){
+            cacheProvider.readLastObject(context, cacheReadListener);
+        } else {
+            Log.d(TAG, "SearchDiskCache.readLastObject: No cache provider has been set.");
+        }
+    }
 }
