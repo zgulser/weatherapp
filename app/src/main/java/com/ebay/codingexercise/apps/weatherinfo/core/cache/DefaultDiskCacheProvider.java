@@ -135,6 +135,14 @@ public final class DefaultDiskCacheProvider implements CacheProvider {
         reader.start();
     }
 
+    /**
+     * Note: I notify upper modules both by an event and a listener here just to show we can
+     *       go with both options depending on our use-case, limits, design etc.
+     *
+     * @param context
+     * @param queryList
+     * @param cacheReadListener
+     */
     private synchronized void readCommon(Context context, ArrayList<Query> queryList, CacheReadListener cacheReadListener){
         if (!queryList.isEmpty()) {
             Collections.sort(queryList, new Comparator<Query>() {
