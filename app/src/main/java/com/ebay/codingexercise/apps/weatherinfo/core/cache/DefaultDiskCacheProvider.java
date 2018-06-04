@@ -35,7 +35,7 @@ import static android.content.Context.MODE_PRIVATE;
 public final class DefaultDiskCacheProvider implements CacheProvider {
 
     private static final String TAG = DefaultDiskCacheProvider.class.getSimpleName();
-    private static final String LAST_ITEM = "lastitem";
+    @VisibleForTesting public static final String LAST_ITEM = "lastitem";
     @VisibleForTesting public static final String FILENAME = "queries";
     public static final String BUNDLE_QUERY_LIST_KEY = "queries";
 
